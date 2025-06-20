@@ -62,7 +62,7 @@ body {
 .droplet {
     position: absolute;
     top: -10%;
-    transition: 1s linear;
+    transition: top 1.5s linear;
     transition-timing-function: linear;
 }
 
@@ -73,4 +73,11 @@ body {
 .droplet-image {
     width: 3.5rem;
     height: 3.5rem;
+}
+
+.notransition {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
 }
