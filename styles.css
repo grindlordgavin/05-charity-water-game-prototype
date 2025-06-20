@@ -14,6 +14,24 @@ Secondary Colors:
 
 */
 
+:root {
+    --yellow: #FFC907;
+    --blue: #2E9DF7;
+    --light-blue: #8BD1CB;
+    --green: #4FCB53;
+    --orange: #FF902A;
+    --red: #F5402C;
+    --dark-green: #159A48;
+    --pink: #F16061;
+
+    /* Additional colors */
+    --grey: grey;
+
+    --jerry-z: 5; /* z-index for Jerry */
+    --game-world-z: -10; /* z-index for the game world */
+    --droplet-z: 0; /* z-index for the droplet */
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -32,6 +50,8 @@ body {
     height: 100%;
     margin: auto;
     background-color: grey;
+
+    z-index: var(--game-world-z);
 }
 
 .jerry-rail {
@@ -52,6 +72,18 @@ body {
 }
 
 .jerry {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    width: 3.5rem;
+    height: 2rem;
+
+    z-index: var(--jerry-z);
+}
+
+.jerry img {
     position: absolute;
     --jerry-size: 7.5rem;
 
@@ -64,6 +96,8 @@ body {
     top: -10%;
     transition: top 1.5s linear;
     transition-timing-function: linear;
+
+    z-index: var(--droplet-z);
 }
 
 .droplet.dropped {
