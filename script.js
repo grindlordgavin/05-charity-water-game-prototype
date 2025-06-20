@@ -44,8 +44,8 @@ class Droplet {
     }
 
     positionRandomly() {
-        const left = jerryRail.getBoundingClientRect().left;
-        const right = jerryRail.getBoundingClientRect().right;
+        const left = jerryRail.clientLeft;
+        const right = jerryRail.clientLeft + jerryRail.clientWidth;
         const xPos = left + (Math.random() * (right - left));
 
         this.element.style.left = `${xPos}px`;
@@ -102,6 +102,7 @@ function moveJerryToX(xPos) {
 
 // attach event listener to the game world for mouse movement
 gameWorld.addEventListener('mousemove', (event) => {
+    console.log('mousemove');
     moveJerryToX(event.clientX - jerryXOffset);
 });
 

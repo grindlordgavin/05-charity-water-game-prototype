@@ -47,13 +47,15 @@ body {
 }
 
 .game-world {
+    position: relative;
+
     width: 500px;
     max-width: 100%;
     height: 100%;
     margin: auto;
     background-color: grey;
 
-    z-index: var(--game-world-z);
+    z-index: 10;
 }
 
 .jerry-rail {
@@ -81,8 +83,6 @@ body {
     position: absolute;
     width: 3.5rem;
     height: 2rem;
-
-    z-index: var(--jerry-z);
 }
 
 .jerry img {
@@ -98,8 +98,6 @@ body {
     top: -10%;
     transition: top 1.5s linear;
     transition-timing-function: linear;
-
-    z-index: var(--droplet-z);
 }
 
 .droplet.dropped {
@@ -126,16 +124,40 @@ body {
     font-size: 300%;
     position: absolute;
     left: 0;
-    top: 1rem;
+    top: 1.5rem;
 }
 
 .shop-button::before {
+    display: block;
+    content: "";
     mask-image: url("img/shopping-cart.svg");
     mask-size: 5rem;
     mask-position: center;
     mask-repeat: no-repeat;
     background-color: black;
+    background-repeat: no-repeat;
 
     width: 5rem;
     height: 5rem;
+
+    transition: background-color 0.2s;
+}
+
+.shop-button:hover::before {
+    background-color: var(--yellow);
+}
+
+.shop-button {
+    width: 5rem;
+    height: 5rem;
+
+    background: none;
+    border: none;
+    position: absolute;
+    top: 1rem;
+    right: 5%;
+}
+
+.shop-button:hover {
+    cursor: pointer;
 }
