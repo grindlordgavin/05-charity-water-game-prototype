@@ -13,3 +13,47 @@ Secondary Colors:
 - Pink:       #F16061
 
 */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100dvh;
+    margin: 0;
+}
+
+.game-world {
+    width: 500px;
+    max-width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: grey;
+}
+
+.jerry-rail {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    height: 5px;
+    background-color: #222;
+    width: 80%;
+    margin: auto;
+    /* Position the rail 80% down the height of .game-world */
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 85%;
+    transform: translateY(-50%);
+}
+
+.jerry {
+    position: absolute;
+    --jerry-size: 7.5rem;
+
+    width: var(--jerry-size);
+    height: var(--jerry-size);
+}
