@@ -1,3 +1,4 @@
+const scoreLabel = document.querySelector('.score');
 const droplet = document.querySelector('.droplet');
 const gameWorld = document.querySelector('.game-world');
 const jerry = document.querySelector('.jerry');
@@ -11,9 +12,16 @@ const jerryXOffset = initialJerryBox.left + (initialJerryBox.width / 2);
 const leftMax = -initialJerryBox.width / 2;
 const rightMax = jerryRail.clientWidth - initialJerryBox.width / 2;
 
+let money = 0; // Initialize money variable
+
 function randomDeadMillis() {
     // Generate a random dead time between .75 to 2 seconds
     return Math.floor(Math.random() * (2000 - 750 + 1)) + 750;
+}
+
+function onDropletCaught() {
+    money += 1; // Increment money when a droplet is caught
+    scoreLabel.textContent = `${money}`; // Update the score label
 }
 
 class Droplet {
@@ -77,8 +85,9 @@ class Droplet {
             }
         } else { // if we're not dead, check for collisions
             if (this.isCollidingWithJerry()) {
-                console.log('Collision detected with Jerry!');
+                // console.log('Collision detected with Jerry!');
                 this.die(); // Handle collision
+                onDropletCaught(); // Call the function to handle catching the droplet
             }
         }
     }
@@ -87,7 +96,7 @@ class Droplet {
 function moveJerryToX(xPos) {
     xPos = Math.max(leftMax, xPos);
     xPos = Math.min(rightMax, xPos);
-    // console.log('Mouse X:', xPos);
+    console.log('Mouse X:', xPos);
     jerry.style.left = `${xPos}px`;
 }
 
@@ -121,15 +130,15 @@ function gameLoop(timestamp) {
     const deltaMillis = timestamp - lastTimestamp;
     lastTimestamp = timestamp;
 
-    droplets.forEach(droplet => droplet.tick(deltaMillis));
+    // skip frame if deltaMillis is too high (e.g., tab was inactive)
+    if (deltaMillis > 500) {
+        requestAnimationFrame(gameLoop);
+        return;
+    }
 
-    // Check for collisions with Jerry
-    // droplets.forEach(droplet => {
-    //     if (droplet.isCollidingWithJerry()) {
-    //         console.log('Collision detected with Jerry!');
-    //         droplet.die(); // Handle collision
-    //     }
-    // });
+    // console.log(`Delta Time: ${deltaMillis} ms`);
+
+    droplets.forEach(droplet => droplet.tick(deltaMillis));
 
     requestAnimationFrame(gameLoop);
 }

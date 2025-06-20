@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" width="28.037mm" height="22.555mm" clip-rule="evenodd" fill-rule="evenodd" image-rendering="optimizeQuality" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" version="1.0" viewBox="0 0 569 458">
+ <defs>
+  <style type="text/css">
+   
+    .str2 {stroke:#2B2A29;stroke-width:27.4814}
+    .str1 {stroke:#2B2A29;stroke-width:34.3502}
+    .str0 {stroke:#2B2A29;stroke-width:42.9393}
+    .fil0 {fill:none}
+   
+  </style>
+ </defs>
+   <path class="fil0 str0" d="m150 109l389-2-64 197h-325v-195z"/>
+   <path class="fil0 str1" d="m150 109c-14-31-28-61-36-76-7-15-8-16-25-16-18 0-54 1-89 1"/>
+    <circle class="fil0 str2" cx="218" cy="402" r="41"/>
+    <circle class="fil0 str2" cx="404" cy="402" r="41"/>
+</svg>
