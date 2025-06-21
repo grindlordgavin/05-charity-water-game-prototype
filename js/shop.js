@@ -54,6 +54,13 @@ for (const elem of document.querySelectorAll('.upgrade')) {
                 // sweep the droplets we spawned after 10 seconds
                 setTimeout(() => sweepDroplets(count), 10000); 
                 break;
+            case "win-cond":
+                // Show the win screen overlay
+                const winScreen = document.getElementById('winScreen');
+                winScreen.classList.add('visible');
+                // Optionally hide the shop
+                shop.classList.remove('visible');
+                break;
             default:
                 alert(`panic! i dont know what upgrade "${elem.dataset.upgrade}" is!`)
         }
