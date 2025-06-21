@@ -113,3 +113,24 @@ for (const elem of document.querySelectorAll('.upgrade')) {
 }
 // Initial update for upgrade states
 updateUpgradeStates();
+
+// Find the first element in the list of upgrades
+const upgradesContainer = document.querySelector('.upgrades');
+const upgradeElems = document.querySelectorAll('.outer-upgrade');
+const firstUpgrade = upgradeElems[0];
+
+// Add an animationend listener that turns on overflow-y: auto
+if (firstUpgrade) {
+    firstUpgrade.addEventListener('animationend', () => {
+        // Enable scrolling in the shop after the animation ends
+        upgradesContainer.style.overflowY = 'auto';
+        console.log('Shop upgrades are now scrollable');
+    });
+}
+
+// When the shop closes, turn overflow-y: hidden
+shopCloseButton.addEventListener('click', () => {
+    // Hide scrolling when the shop is closed
+    upgradesContainer.style.overflowY = 'hidden';
+    console.log('Shop upgrades are no longer scrollable');
+});

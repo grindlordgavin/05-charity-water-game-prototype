@@ -23,15 +23,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-}
-
-.shop-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-
+    height: 15%;
 }
 
 .close-shop:hover {
@@ -42,7 +34,7 @@
     background: none;
     border: none;
 
-    font-size: 500%;
+    font-size: 9vh;
 
     margin-left: 1rem;
 
@@ -51,9 +43,8 @@
 
 .shop-h2 {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 300%;
+    left: 20%;
+    font-size: 6vh;
 }
 
 .balance {
@@ -61,16 +52,17 @@
     justify-content: space-between;
     align-items: center;
     color: var(--blue);
-    font-size: 150%;
+    font-size: 3vh;
     border: 3px var(--blue) solid;
     border-radius: 10px;
     padding: 2px 5px;
-    width: 8ch;
+    width: 6.5ch;
+    margin-right: 4%;
     background: #f2f2f2;
     color: black;
 }
 
-.shop-balance {
+.balance-text {
     color: black;
     font-weight: 500;
 }
@@ -87,14 +79,17 @@
 }
 
 .upgrades {
-    width: 85%;
-    margin: auto;
+    max-height: 85%;
+    overflow-y: hidden;
+    width: 100%;
 }
 
 .outer-upgrade {
     transform: translateY(60px);
     opacity: 0;
     transition: background-color .2s, transform .3s, opacity .3s;
+    width: 85%;
+    margin: auto;
 }
 
 .shop.visible .outer-upgrade {
@@ -135,6 +130,12 @@
     background-color: var(--yellow);
     transform: scale(1.1);
     z-index: 1;
+}
+
+.upgrade:active {
+    /* Shrink the button a bit when clicked */
+    transform: scale(0.95);
+    background-color: #ffe066;
 }
 
 .upgrade * {

@@ -37,19 +37,41 @@ export function decrementMoney(amount) {
     }
 }
 
-// Function to convert a number to a readable string (e.g., 100000 -> "100k")
+function toPrecisionFloor(number, precision) {
+  if (number === 0) return '0'.padEnd(precision + 1, '.0');
+
+  const sign = Math.sign(number);
+  const abs = Math.abs(number);
+
+  const exp = Math.floor(Math.log10(abs));
+  const scale = Math.pow(10, precision - 1 - exp);
+  const floored = Math.floor(abs * scale) / scale;
+
+  return (sign * floored).toPrecision(precision);
+}
+
+// Function to convert a number to a readable string with up to 3 digits (e.g., 123k, 12.3k, 1.23k)
 export function formatNumber(num) {
-    const decimals = 2; // Use this variable for all toFixed calls
+    // Helper function to keep up to 3 significant digits
+    function formatShort(n, suffix) {
+        // Convert number to string with up to 3 digits (no trailing zeros)
+        let str = toPrecisionFloor(n, 3);
+        // Remove unnecessary decimal point and zeros
+        str = parseFloat(str).toString();
+        return `${str}${suffix}`;
+    }
+
     if (num >= 1000000000) {
-        // Billions: 1,000,000,000 -> 1.00B
-        return `${(num / 1000000000).toFixed(decimals)}B`;
+        // Billions
+        return formatShort(num / 1000000000, 'B');
     } else if (num >= 1000000) {
-        // Millions: 1,000,000 -> 1.00M
-        return `${(num / 1000000).toFixed(decimals)}M`;
+        // Millions
+        return formatShort(num / 1000000, 'M');
     } else if (num >= 1000) {
-        // Thousands: 1,000 -> 1.00k
-        return `${(num / 1000).toFixed(decimals)}k`;
+        // Thousands
+        return formatShort(num / 1000, 'k');
     } else {
+        // Less than 1000, show as is
         return `${num}`;
     }
 }
