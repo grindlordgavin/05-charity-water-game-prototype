@@ -185,10 +185,13 @@ body {
     right: 5%;
 
     outline: none;
+
+    transition: transform .3s;
 }
 
 .shop-button:hover {
     cursor: pointer;
+    transform: scale(1.1);
 }
 
 .shop.visible {
