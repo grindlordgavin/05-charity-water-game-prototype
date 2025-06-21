@@ -87,6 +87,7 @@ body {
 }
 
 .jerry {
+    pointer-events: none; /* Prevents Jerry from receiving mouse inputs */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -253,7 +254,7 @@ body {
 
 .balance {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 
     color: var(--blue);
@@ -262,7 +263,7 @@ body {
     border: 3px var(--blue) solid;
     border-radius: 10px;
     padding: 2px 5px;
-    padding-left: 5ch;
+    width: 8ch;
     background: #f2f2f2;
     color: black;
 }
@@ -278,8 +279,7 @@ body {
 
 .balance img {
     position: absolute;
-    right: 3ch;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
     width: 3.5rem;
     height: 3.5rem;
 }
@@ -391,6 +391,24 @@ body {
     z-index: 1;
 }
 
+.upgrade.disabled {
+    background-color: #aaa !important; /* Greyed out */
+    pointer-events: none; /* Prevent interaction */
+    transform: none !important;
+    opacity: 0.8;
+}
+
+.upgrade.disabled:hover {
+    background-color: #ccc !important;
+    color: #888 !important;
+    transform: none !important;
+    cursor: not-allowed;
+}
+
+.upgrade.disabled .cost {
+    color: #911;
+}
+
 .win-screen {
     visibility: hidden;
     opacity: 0;
@@ -434,6 +452,7 @@ body {
 .win-title {
     font-size: 3.5rem;
     font-weight: bold;
+    margin-top: 8%;
     margin-bottom: 1.5rem;
 }
 
@@ -469,5 +488,36 @@ body {
     background-color: var(--yellow);
     color: #111;
     border-color: var(--yellow);
+    transform: scale(1.08);
+}
+
+.cw-logo {
+    position: absolute;
+    top: 7.5%;
+    height: 18%;
+    width: auto;
+
+    margin-bottom: 2rem;
+}
+
+.donate-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 1rem 2.5rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: 2px solid var(--yellow);
+    border-radius: 10px;
+    background: var(--yellow);
+    color: #111;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s, border-color 0.2s;
+    cursor: pointer;
+}
+
+.donate-btn:hover {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
     transform: scale(1.08);
 }

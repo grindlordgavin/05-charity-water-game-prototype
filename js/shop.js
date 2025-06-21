@@ -1,17 +1,29 @@
 import { Droplet, droplets, dropletValue, setDropletValue, setRareChance, sweepDroplets } from './droplet.js';
 import { jerry, shop, shopButton, shopCloseButton } from './elements.js';
-import { decrementMoney } from './money.js';
+import { decrementMoney, formatNumber, onMoneyChange, getMoney } from './money.js';
 
 let jerryScale = 1;
 let rareCount = 0;
 
-// TODO: potential upgrades purchable by the player:
-// - increase droplet spawn rate
-// - increase droplet value
-// - idle generation of money
-// - temporary heightened droplet spawn rate
-// - rare droplets
-// - win the game
+// Store the real cost of each upgrade in an object
+const upgradeCosts = {
+    "droplet-spawn-rate": 35,
+    "droplet-value": 50,
+    "jerry-size": 100,
+    "boost": 150,
+    "rare-droplets": 250,
+    "win-cond": 1000000
+};
+
+// Store the cost multiplier for each upgrade in an object
+const upgradeCostMultipliers = {
+    "droplet-spawn-rate": 1.25,
+    "droplet-value": 1.25,
+    "jerry-size": 2.5,
+    "boost": 1.25,
+    "rare-droplets": 1.25,
+    "win-cond": 1.25
+};
 
 shopButton.addEventListener('click', () => {
     shop.classList.add('visible'); // Show the shop when the button is clicked
@@ -24,12 +36,15 @@ shopCloseButton.addEventListener('click', () => {
 for (const elem of document.querySelectorAll('.upgrade')) {
     elem.addEventListener('click', (event) => {
         const costElem = elem.querySelector(".cost");
-        const price = Number(costElem.innerText);
+        const upgradeType = elem.dataset.upgrade;
+        // Get the real cost from the upgradeCosts object
+        const realCost = upgradeCosts[upgradeType];
+        const multiplier = upgradeCostMultipliers[upgradeType];
 
-        if (!decrementMoney(price)) return;
+        if (!decrementMoney(realCost)) return;
 
         // handle upgrade based on data-upgrade
-        switch (elem.dataset.upgrade) {
+        switch (upgradeType) {
             case "droplet-spawn-rate":
                 droplets.push(new Droplet());
                 droplets.push(new Droplet());
@@ -62,9 +77,39 @@ for (const elem of document.querySelectorAll('.upgrade')) {
                 shop.classList.remove('visible');
                 break;
             default:
-                alert(`panic! i dont know what upgrade "${elem.dataset.upgrade}" is!`)
+                alert(`panic! i dont know what upgrade "${upgradeType}" is!`)
         }
 
-        costElem.innerText = String(Math.floor(price * 1.25));
+        // Increase the real cost and update the visible cost using formatNumber
+        upgradeCosts[upgradeType] = Math.floor(realCost * multiplier);
+        costElem.innerText = formatNumber(upgradeCosts[upgradeType]);
     });
 }
+
+// Function to enable/disable upgrades based on player's money
+function updateUpgradeStates() {
+    const money = getMoney();
+    for (const elem of document.querySelectorAll('.upgrade')) {
+        const upgradeType = elem.dataset.upgrade;
+        const realCost = upgradeCosts[upgradeType];
+        if (realCost > money) {
+            elem.classList.add('disabled');
+        } else {
+            elem.classList.remove('disabled');
+        }
+    }
+}
+
+// Register updateUpgradeStates to run whenever money changes
+onMoneyChange.push(updateUpgradeStates);
+
+// On game launch, update the visible cost of upgrades
+for (const elem of document.querySelectorAll('.upgrade')) {
+    const costElem = elem.querySelector('.cost');
+    const upgradeType = elem.dataset.upgrade;
+    if (upgradeCosts[upgradeType] !== undefined) {
+        costElem.innerText = formatNumber(upgradeCosts[upgradeType]);
+    }
+}
+// Initial update for upgrade states
+updateUpgradeStates();

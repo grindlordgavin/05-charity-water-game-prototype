@@ -122,8 +122,16 @@ export const droplets = [
 
 // removes `count` droplets from the droplets array when the droplets are off screen
 export function sweepDroplets(count) {
-    const targetIdx = droplets.length - count - 1;
-    for (let idx = droplets.length - 1; idx > targetIdx; idx--) {
-        droplets[idx].toSweep = true;
+    // Filter droplets that are not already marked to be swept
+    const unsweptDroplets = droplets.filter(droplet => !droplet.toSweep);
+
+    // Throw an error if count is greater than the number of unswept droplets
+    if (count > unsweptDroplets.length) {
+        throw new Error(`Cannot sweep ${count} droplets; only ${unsweptDroplets.length} droplets are available to sweep.`);
+    }
+
+    // Mark only unswept droplets to be swept
+    for (let i = 0; i < count; i++) {
+        unsweptDroplets[i].toSweep = true;
     }
 }
