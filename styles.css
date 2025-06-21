@@ -39,13 +39,17 @@ Secondary Colors:
     font-family: Arial, Helvetica, sans-serif;
 
     user-select: none;
+
+    color: #eee;
 }
 
 body {
     width: 100%;
     height: 100dvh;
     margin: 0;
-    overflow-y: hidden;
+    overflow: hidden;
+
+    background-color: #090955;
 }
 
 .game-world {
@@ -57,7 +61,7 @@ body {
     max-width: 100%;
     height: 100%;
     margin: auto;
-    background-color: grey;
+    background-color: darkblue;
 
     z-index: 10;
 }
@@ -67,7 +71,10 @@ body {
     justify-content: start;
     align-items: center;
 
-    height: 5px;
+    border: 2.5px solid white;
+    border-radius: 5px;
+
+    height: 0px;
     background-color: #222;
     width: 80%;
     margin: auto;
@@ -85,8 +92,11 @@ body {
     align-items: center;
 
     position: absolute;
+    transform: translateY(-1.5px);
     width: 3.5rem;
     height: 2rem;
+
+    transition: transform .35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .jerry img {
@@ -108,9 +118,22 @@ body {
     top: 100%;
 }
 
-.droplet-image {
+.droplet::before {
+    display: block;
+    content: "";
+    mask-image: url("img/droplet.svg");
+    mask-size: 3.5rem;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    background-color: var(--blue);
+    background-repeat: no-repeat;
+    
     width: 3.5rem;
     height: 3.5rem;
+}
+
+.droplet.rare::before {
+    background-color: var(--yellow);
 }
 
 .notransition {
@@ -138,7 +161,7 @@ body {
     mask-size: 5rem;
     mask-position: center;
     mask-repeat: no-repeat;
-    background-color: black;
+    background-color: #eee;
     background-repeat: no-repeat;
 
     width: 5rem;
@@ -186,7 +209,7 @@ body {
     max-width: 100%;
     height: 100%;
     margin: auto;
-    background-color: #0009;
+    background-color: #0006;
 
     backdrop-filter: blur(5px);
 
@@ -195,7 +218,130 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+
+}
+
+.close-shop:hover {
+    color: var(--yellow);
+}
+
+.close-shop {
+    background: none;
+    border: none;
+
+    font-size: 500%;
+
+    margin-left: 1rem;
+
+    transition: color 0.25s;
+}
+
+.shop-h2 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 300%;
+} 
+
+.balance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: var(--blue);
+    font-size: 150%;
+
+    border: 3px var(--blue) solid;
+    border-radius: 10px;
+    padding: 2px 5px;
+    padding-left: 5ch;
+    background: #f2f2f2;
+    color: black;
+}
+
+.shop-balance {
+    color: black;
+    font-weight: 500;
+}
+
+.img-container {
+    position: relative;
+}
+
 .balance img {
+    position: absolute;
+    right: 3ch;
+    transform: translateY(-50%);
     width: 3.5rem;
     height: 3.5rem;
+}
+
+.upgrades {
+    width: 85%;
+    margin: auto;
+}
+
+.upgrade {
+    background-color: #eee;
+    border-radius: 12.5px;
+    padding: 10px;
+
+    font-size: 110%;
+
+    margin-bottom: 15px;
+
+    border: 4.5px solid #222;
+
+    transition: transform .3s ease-out, background-color .2s ease-out;
+}
+
+.upgrade:hover {
+    background-color: var(--yellow);
+    transform: scale(1.1);
+}
+
+.upgrade * {
+    color: black;
+}
+
+.upgrade .bottom {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+}
+
+.upgrade .bottom .p {
+    display: block;
+}
+
+.cost {
+    display: flex;
+    width: 30%;
+    justify-content: flex-end;
+
+    font-size: 125%;
+}
+
+.cost::before {
+    display: block;
+    content: "";
+
+    position: relative;
+
+    mask-image: url('img/droplet.svg');
+    background-color: var(--blue);
+
+    mask-size: 1em;
+
+    mask-position: center;
+    mask-repeat: no-repeat;
+    background-repeat: no-repeat;
+
+    width: 1em;
+    height: 1em;
 }

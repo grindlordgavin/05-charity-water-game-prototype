@@ -1,5 +1,17 @@
-import { incrementMoney } from './state.js';
+import { incrementMoney } from './money.js';
 import { gameWorld, jerry, jerryRail } from './elements.js';
+
+export let dropletValue = 1;
+export let rareChance = 0;
+
+export function setDropletValue(newValue) {
+    dropletValue = newValue;
+}
+
+export function setRareChance(newChance) {
+    rareChance = newChance;
+    console.log(`Rare chance set to ${rareChance}`);
+}
 
 const droplet = document.querySelector('.droplet');
 droplet.parentElement.removeChild(droplet); // Remove droplet from the DOM
@@ -9,14 +21,16 @@ function randomDeadMillis() {
     return Math.floor(Math.random() * (2000 - 750 + 1)) + 750;
 }
 
-function onDropletCaught() {
-    incrementMoney(1); // Increment the money by 1 when a droplet is caught
+function onDropletCaught(rare) {
+    incrementMoney(rare ? dropletValue * 10 : dropletValue); // Increment the money by 1 when a droplet is caught
 }
 
 export class Droplet {
     constructor() {
         this.element = droplet.cloneNode(true);
         this.deadMillis = randomDeadMillis();
+        this.toSweep = false;
+
         this.positionRandomly();
 
         this.element.addEventListener('transitionend', this.die.bind(this));
@@ -38,6 +52,12 @@ export class Droplet {
         const xPos = left + (Math.random() * (right - left));
 
         this.element.style.left = `${xPos}px`;
+
+        if (Math.random() < rareChance) {
+            this.element.classList.add('rare');
+        } else {
+            this.element.classList.remove('rare');
+        }
     }
 
     isCollidingWithJerry() {
@@ -62,6 +82,16 @@ export class Droplet {
         if (this.deadMillis >= 0) {
             this.deadMillis -= deltaMillis;
 
+            if (this.toSweep) {
+                // swap-remove from droplets
+                const index = droplets.indexOf(this);
+                if (index != droplets.length - 1) {
+                    droplets[index] = droplets[droplets.length - 1];
+                }
+                droplets.pop();
+                this.element.remove();
+            }
+
             // if deadtime is up, reset the droplet
             if (this.deadMillis <= 0) {
                 this.element.classList.add('notransition'); // stop transitions
@@ -76,8 +106,24 @@ export class Droplet {
             if (this.isCollidingWithJerry()) {
                 // console.log('Collision detected with Jerry!');
                 this.die(); // Handle collision
-                onDropletCaught(); // Call the function to handle catching the droplet
+                onDropletCaught(this.element.classList.contains('rare')); // Call the function to handle catching the droplet
             }
         }
+    }
+}
+
+export const droplets = [
+    new Droplet(),
+    new Droplet(),
+    new Droplet(),
+    new Droplet(),
+    new Droplet(),
+];
+
+// removes `count` droplets from the droplets array when the droplets are off screen
+export function sweepDroplets(count) {
+    const targetIdx = droplets.length - count - 1;
+    for (let idx = droplets.length - 1; idx > targetIdx; idx--) {
+        droplets[idx].toSweep = true;
     }
 }

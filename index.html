@@ -17,26 +17,71 @@
         </div>
 
         <div class="droplet">
-            <img src="img/droplet.svg" alt="Water Droplet" class="droplet-image">
+            <!-- <img src="img/droplet.svg" alt="Water Droplet" class="droplet-image"> -->
         </div>
     </div>
 
     <div class="shop">
         <div class="shop-header">
-            <button class="close-shop">&gt;</button>
-            <h2>Shop</h2>
+            <button class="close-shop">&lt;</button>
+            <h2 class="shop-h2">Shop</h2>
             <span class="balance">
-                <img src="img/droplet.svg" alt="Water droplet">
+                <div class="img-container"><img src="img/droplet.svg" alt="Water droplet"></div>
                 <span class="shop-balance">0</span>
             </span>
         </div>
         
+        <div class="upgrades">
+            <div class="upgrade" data-upgrade="droplet-spawn-rate">
+                <h3 class="upgrade-title">More Droplets</h3>
+                <div class="bottom">
+                    <p class="upgrade-description">Spawns more droplets to pick up.</p>
+                    <span class="cost">35</span>
+                </div>
+            </div>
+
+            <div class="upgrade" data-upgrade="droplet-value">
+                <h3 class="upgrade-title">Better Droplets</h3>
+                <div class="bottom">
+                    <p class="upgrade-description">Collected droplets are now worth more.</p>
+                    <span class="cost">50</span>
+                </div>
+            </div>
+
+            <div class="upgrade" data-upgrade="jerry-size">
+                <h3 class="upgrade-title">Bigger Jerry Can</h3>
+                <div class="bottom">
+                    <p class="upgrade-description">Makes the Jerry Can larger.</p>
+                    <span class="cost">100</span>
+                </div>
+            </div>
+
+            <div class="upgrade" data-upgrade="boost">
+                <h3 class="upgrade-title">Rain Storm</h3>
+                <div class="bottom">
+                    <p class="upgrade-description">Lots of water droplets spawn for a little bit.</p>
+                    <span class="cost">150</span>
+                </div>
+            </div>
+
+            <div class="upgrade" data-upgrade="rare-droplets">
+                <h3 class="upgrade-title">Golden Droplets</h3>
+                <div class="bottom">
+                    <p class="upgrade-description">Increases the chance of rare droplets worth extra!</p>
+                    <span class="cost">250</span>
+                </div>
+            </div>
+
+            <div class="upgrade" data-upgrade="win-cond">
+                <h3 class="upgrade-title">Win the game</h3>
+                <div class="bottom">
+                    <p class="upgrade-description">Finish the game and bring water to everyone!</p>
+                    <span class="cost">100000</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script type="module" src="js/game.js"></script>
-    <!-- <script src="js/droplet.js"></script>
-    <script src="js/shop.js"></script>
-    <script src="js/jerry.js"></script>
-    <script src="script.js"></script> -->
 </body>
 </html>

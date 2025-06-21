@@ -1,16 +1,8 @@
-import { Droplet } from './droplet.js';
+import { Droplet, droplets } from './droplet.js';
 import './jerry.js';
 import './shop.js';
 
 export let money = 0;
-
-const droplets = [
-    new Droplet(),
-    new Droplet(),
-    new Droplet(),
-    new Droplet(),
-    new Droplet(),
-];
 
 for (let idx = 0; idx < droplets.length; idx++) {
     droplets[idx].deadMillis += idx * 300;
