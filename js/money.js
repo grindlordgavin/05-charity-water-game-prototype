@@ -57,12 +57,13 @@ export function formatNumber(num) {
 // Cheat feature: Press grave/tilde key to get 10k money, only on localhost
 if (window.location.hostname === 'localhost') {
     window.addEventListener('keydown', (event) => {
-        // event.key is '`' for grave/tilde key
+        // Grave/tilde key: event.key is '`' (grave) or '~' (tilde with shift)
         if (event.key === '`') {
-            // Add 10,000 money
-            incrementMoney(10000);
-            // Optional: log for debugging
+            setMoney(getMoney() + 10000); // Add 10,000 money
             console.log('Cheat activated: +10,000 money');
+        } else if (event.key === '~') {
+            setMoney(getMoney() + 1000000); // Add 1,000,000 money
+            console.log('Cheat activated: +1,000,000 money');
         }
     });
 }

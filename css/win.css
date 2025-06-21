@@ -1,0 +1,123 @@
+/* Win screen and button styles */
+.win-screen {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 500px;
+    max-width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: #0006;
+    backdrop-filter: blur(5px);
+    z-index: 20;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.win-screen.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.win-content {
+    width: 80%;
+    max-width: 32rem;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.win-title, .win-message, .cw-logo, .restart-btn, .donate-btn {
+    opacity: 0;
+    transform: translateY(60px);
+}
+
+.win-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-top: 8%;
+    margin-bottom: 1.5rem;
+}
+
+.win-message {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.win-screen.visible .cw-logo {
+    animation: slideUpFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.05s;
+}
+.win-screen.visible .win-title {
+    animation: slideUpFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.1s;
+}
+.win-screen.visible .win-message {
+    animation: slideUpFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.25s;
+}
+.win-screen.visible .restart-btn {
+    animation: slideUpFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.4s;
+}
+.win-screen.visible .donate-btn {
+    animation: slideUpFadeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: 0.55s;
+}
+
+.restart-btn {
+    margin-top: 2rem;
+    padding: 1rem 2.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid var(--yellow);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--yellow);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.restart-btn:hover {
+    background-color: var(--yellow);
+    color: #111;
+    border-color: var(--yellow);
+    transform: scale(1.08);
+}
+
+.cw-logo {
+    position: absolute;
+    top: 7.5%;
+    height: 18%;
+    width: auto;
+    margin-bottom: 2rem;
+}
+
+.donate-btn {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 1rem 2.5rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border: 2px solid var(--yellow);
+    border-radius: 10px;
+    background: var(--yellow);
+    color: #111;
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, transform 0.2s, border-color 0.2s;
+    cursor: pointer;
+}
+
+.donate-btn:hover {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+    transform: scale(1.08);
+}

@@ -1,0 +1,54 @@
+/* Jerry and droplet styles */
+.jerry {
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    transform: translateY(-1.5px);
+    width: 3.5rem;
+    height: 2rem;
+    transition: transform .35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.jerry img {
+    position: absolute;
+    --jerry-size: 7.5rem;
+    width: var(--jerry-size);
+    height: var(--jerry-size);
+}
+
+.droplet {
+    position: absolute;
+    top: -10%;
+    transition: top 1.5s linear;
+    transition-timing-function: linear;
+}
+
+.droplet.dropped {
+    top: 100%;
+}
+
+.droplet::before {
+    display: block;
+    content: "";
+    mask-image: url("../img/droplet.svg");
+    mask-size: 3.5rem;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    background-color: var(--blue);
+    background-repeat: no-repeat;
+    width: 3.5rem;
+    height: 3.5rem;
+}
+
+.droplet.rare::before {
+    background-color: var(--yellow);
+}
+
+.notransition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    transition: none !important;
+}
