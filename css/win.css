@@ -40,6 +40,7 @@
 }
 
 .win-title {
+    font-family: var(--serif);
     font-size: 3.5rem;
     font-weight: bold;
     margin-top: 8%;
@@ -47,6 +48,7 @@
 }
 
 .win-message {
+    font-family: var(--serif);
     font-size: 2rem;
     margin-bottom: 1rem;
 }

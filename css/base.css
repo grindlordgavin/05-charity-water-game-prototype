@@ -1,4 +1,10 @@
 /* General resets and variables */
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('../proxima-nova.ttf');
+}
+
 :root {
     --yellow: #FFC907;
     --blue: #2E9DF7;
@@ -8,16 +14,21 @@
     --red: #F5402C;
     --dark-green: #159A48;
     --pink: #F16061;
+
     --grey: grey;
+    --dark-blue: #090955;
+
     --jerry-z: 5;
     --game-world-z: -10;
     --droplet-z: 0;
+
+    --serif: Georgia, 'Times New Roman', Times, serif;
+    --sans-serif: 'Proxima Nova', Arial, Helvetica, sans-serif;
 }
 
 * {
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
     user-select: none;
     color: #eee;
 }
@@ -31,5 +42,6 @@ body {
     height: 100dvh;
     margin: 0;
     overflow: hidden;
-    background-color: #090955;
+    background-color: var(--dark-blue);
+    font-family: var(--sans-serif);
 }

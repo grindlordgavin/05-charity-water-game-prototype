@@ -1,0 +1,17 @@
+footer {
+  font-family: var(--serif);
+
+  width: 100dvw;
+  text-align: center;
+  background-color: var(--dark-blue);
+
+  padding: .5em;
+
+  position: absolute;
+  z-index: 1000;
+  bottom: 0;
+}
+
+footer a {
+  color: var(--yellow);
+}
