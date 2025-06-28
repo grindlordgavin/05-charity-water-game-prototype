@@ -5,6 +5,8 @@ import { decrementMoney, formatNumber, onMoneyChange, getMoney } from './money.j
 let jerryScale = 1;
 let rareCount = 0;
 
+const shopButtonBadge = document.querySelector('.badge');
+
 // Store the real cost of each upgrade in an object
 const upgradeCosts = {
     "droplet-spawn-rate": 35,
@@ -88,6 +90,7 @@ for (const elem of document.querySelectorAll('.upgrade')) {
 
 // Function to enable/disable upgrades based on player's money
 function updateUpgradeStates() {
+    let purchasable = 0;
     const money = getMoney();
     for (const elem of document.querySelectorAll('.upgrade')) {
         const upgradeType = elem.dataset.upgrade;
@@ -95,8 +98,16 @@ function updateUpgradeStates() {
         if (realCost > money) {
             elem.classList.add('disabled');
         } else {
+            purchasable++;
             elem.classList.remove('disabled');
         }
+    }
+
+    if (purchasable > 0) {
+      shopButtonBadge.classList.add('visible');
+      shopButtonBadge.querySelector('span').textContent = purchasable;
+    } else {
+      shopButtonBadge.classList.remove('visible');
     }
 }
 

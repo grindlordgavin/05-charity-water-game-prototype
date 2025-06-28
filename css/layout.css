@@ -9,6 +9,8 @@
     margin: auto;
     background-color: darkblue;
     z-index: 10;
+
+    overflow: hidden;
 }
 
 .jerry-rail {
@@ -76,4 +78,77 @@
 .shop-button:hover {
     cursor: pointer;
     transform: scale(1.1);
+}
+
+.rays {
+  top: 0;
+  right: 0;
+
+  translate: 50% -55%;
+
+  position: absolute;
+  width: 22rem;
+  height: 22rem;
+
+  background: repeating-conic-gradient(
+    transparent 0%, 
+
+    #fff9 3.33%,
+    #fff9 6.65%,
+    
+    transparent 10%
+  );
+
+  mask-image: radial-gradient(white, transparent 70%);
+
+  animation: spin 20s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.badge {
+  border-radius: 50%;
+  background: red;
+  color: white;
+  /* font-weight: bold; */
+  font-size: 150%;
+
+  min-width: 2ch;
+  height: 2ch;
+  padding: 3px;
+
+  line-height: 0;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.badge:not(.visible) {
+  display: none;
+}
+
+.badge.visible {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: popIn .45s cubic-bezier(0.265, -0.01, 0.493, 2);
+}
+
+@keyframes popIn {
+  from {
+    scale: 0%;
+  }
+
+  to {
+    scale: 100%;
+  }
 }
