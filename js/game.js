@@ -1,12 +1,7 @@
-import { Droplet, droplets } from './droplet.js';
+import { Droplet, droplets, start } from './droplet.js';
 import './jerry.js';
 import './shop.js';
-
-export let money = 0;
-
-for (let idx = 0; idx < droplets.length; idx++) {
-    droplets[idx].deadMillis += idx * 300;
-}
+import {playButton} from './title.js';
 
 let lastTimestamp = 0;
 function gameLoop(timestamp) {
@@ -26,3 +21,11 @@ function gameLoop(timestamp) {
     requestAnimationFrame(gameLoop);
 }
 requestAnimationFrame(gameLoop); // Start the game loop
+
+playButton.addEventListener('click', () => {
+    start();
+
+    for (let idx = 0; idx < droplets.length; idx++) {
+        droplets[idx].deadMillis += idx * 300;
+    }
+});

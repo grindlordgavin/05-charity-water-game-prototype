@@ -46,6 +46,10 @@
     background-color: var(--yellow);
 }
 
+.droplet.lethal::before {
+    background-color: #644;
+}
+
 .notransition {
     -webkit-transition: none !important;
     -moz-transition: none !important;

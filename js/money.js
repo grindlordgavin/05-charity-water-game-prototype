@@ -1,15 +1,9 @@
 import { scoreLabel, shopBalanceLabel } from "./elements.js";
 
-let money = 0;
+export let money = 0;
 
 // Exported array of functions to call when setMoney is called
 export const onMoneyChange = [];
-
-
-
-export function getMoney() {
-    return money;
-}
 
 export function setMoney(newMoney) {
     money = newMoney;
@@ -81,10 +75,10 @@ if (window.location.hostname === 'localhost') {
     window.addEventListener('keydown', (event) => {
         // Grave/tilde key: event.key is '`' (grave) or '~' (tilde with shift)
         if (event.key === '`') {
-            setMoney(getMoney() + 10000); // Add 10,000 money
+            setMoney(money + 10000); // Add 10,000 money
             console.log('Cheat activated: +10,000 money');
         } else if (event.key === '~') {
-            setMoney(getMoney() + 1000000); // Add 1,000,000 money
+            setMoney(money + 1000000); // Add 1,000,000 money
             console.log('Cheat activated: +1,000,000 money');
         }
     });

@@ -1,6 +1,6 @@
 import { Droplet, droplets, dropletValue, setDropletValue, setRareChance, sweepDroplets } from './droplet.js';
 import { jerry, shop, shopButton, shopCloseButton } from './elements.js';
-import { decrementMoney, formatNumber, onMoneyChange, getMoney } from './money.js';
+import { decrementMoney, formatNumber, onMoneyChange, money } from './money.js';
 
 let jerryScale = 1;
 let rareCount = 0;
@@ -91,7 +91,6 @@ for (const elem of document.querySelectorAll('.upgrade')) {
 // Function to enable/disable upgrades based on player's money
 function updateUpgradeStates() {
     let purchasable = 0;
-    const money = getMoney();
     for (const elem of document.querySelectorAll('.upgrade')) {
         const upgradeType = elem.dataset.upgrade;
         const realCost = upgradeCosts[upgradeType];

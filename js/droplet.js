@@ -1,5 +1,7 @@
-import { incrementMoney } from './money.js';
+import { decrementMoney, incrementMoney } from './money.js';
 import { gameWorld, jerry, jerryRail } from './elements.js';
+import { hardMode } from './title.js';
+import { money } from './money.js';
 
 export let dropletValue = 1;
 export let rareChance = 0;
@@ -21,8 +23,12 @@ function randomDeadMillis() {
     return Math.floor(Math.random() * (2000 - 750 + 1)) + 750;
 }
 
-function onDropletCaught(rare) {
-    incrementMoney(rare ? dropletValue * 10 : dropletValue); // Increment the money by 1 when a droplet is caught
+function onDropletCaught(rare, lethal) {
+    if (lethal) {
+        decrementMoney(Math.ceil(money * (.1 + Math.min(.3, (dropletValue / 1000)))));
+    } else {
+        incrementMoney(rare ? dropletValue * 10 : dropletValue);
+    }
 }
 
 export class Droplet {
@@ -53,10 +59,15 @@ export class Droplet {
 
         this.element.style.left = `${xPos}px`;
 
+        this.element.classList.remove('rare');
+        this.element.classList.remove('lethal');
+
         if (Math.random() < rareChance) {
             this.element.classList.add('rare');
-        } else {
-            this.element.classList.remove('rare');
+        } 
+        
+        if (hardMode && Math.random() < .1 + (rareChance / 10)) {
+            this.element.classList.add('lethal');
         }
     }
 
@@ -106,19 +117,13 @@ export class Droplet {
             if (this.isCollidingWithJerry()) {
                 // console.log('Collision detected with Jerry!');
                 this.die(); // Handle collision
-                onDropletCaught(this.element.classList.contains('rare')); // Call the function to handle catching the droplet
+                onDropletCaught(this.element.classList.contains('rare'), this.element.classList.contains('lethal')); // Call the function to handle catching the droplet
             }
         }
     }
 }
 
-export const droplets = [
-    new Droplet(),
-    new Droplet(),
-    new Droplet(),
-    new Droplet(),
-    new Droplet(),
-];
+export let droplets = [];
 
 // removes `count` droplets from the droplets array when the droplets are off screen
 export function sweepDroplets(count) {
@@ -134,4 +139,14 @@ export function sweepDroplets(count) {
     for (let i = 0; i < count; i++) {
         unsweptDroplets[i].toSweep = true;
     }
+}
+
+export function start() {
+    droplets = [
+        new Droplet(),
+        new Droplet(),
+        new Droplet(),
+        new Droplet(),
+        new Droplet(),
+    ];
 }
